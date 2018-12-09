@@ -1,0 +1,21 @@
+{
+  "name": "chat-experiment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.4",
+    "lokijs": "^1.5.5"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  }
+}
