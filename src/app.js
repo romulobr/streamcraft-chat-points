@@ -38,10 +38,17 @@ function start(usersCollection) {
 
     app.post("/", (req, res) => {
         const messages = req.body.value;
+        const nicks = [];
         messages.forEach(message => {
             const user = parser.parseData(message);
-            points.addPoints(user.nick, 1);
+            if (nicks.indexOf(user.nick) === -1) {
+                nicks.push(user.nick);
+            }
         });
+        nicks.forEach(nick => {
+            points.addPoints(nick, 1);
+        });
+
         res.send('ok');
     });
     app.listen(port, () => console.log(`Example app listening on port ${port}!`));
