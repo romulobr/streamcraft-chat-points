@@ -35,7 +35,25 @@ function start(usersCollection) {
     });
 
     app.get("/", (req, res) => res.send(points.getAllPoints()));
-
+    
+    app.get("/html", (req, res) => {
+        let usersPoints = points.getAllPoints();
+        if (req.query.limit){
+            usersPoints = usersPoints.slice(0, req.query.limit);
+        }
+        const userRows = usersPoints.map(user => {
+          return `<tr>
+          <td class="user-nick">${user.nick}</td>
+          <td class="user-points">${user.points}</td>
+          </tr>`;
+        }).join(' ');
+        res.send(`<html><body>
+        <div class="content">
+        <table>${userRows}</table>
+        </div>
+        </body>
+        </html>`);
+    });
     app.post("/", (req, res) => {
         const messages = req.body.value;
         const nicks = [];
@@ -45,6 +63,7 @@ function start(usersCollection) {
                 nicks.push(user.nick);
             }
         });
+        console.log(`adding points to ${messages.length} users`);
         nicks.forEach(nick => {
             points.addPoints(nick, 1);
         });
