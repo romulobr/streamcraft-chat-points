@@ -23,6 +23,7 @@ function databaseInitialize() {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
+    limit: '100mb',
     extended: true
 }));
 
@@ -54,6 +55,7 @@ function start(usersCollection) {
         </body>
         </html>`);
     });
+
     app.post("/", (req, res) => {
         const messages = req.body.value;
         const nicks = [];
